@@ -28,7 +28,11 @@ describe Game do
     end
   end
   describe '#can_be_archived?' do
-    it 'returns the correct name' do
+    it 'returns the whther it can be archived' do
+      game = Game.new '2018-06-15', true, '2010-02-03'
+      expect(game.can_be_archived?).to eql true
+    end
+    it 'returns the whther it can be archived' do
       game = Game.new '2018-06-15', true, '2022-02-03'
       expect(game.can_be_archived?).to eql false
     end
