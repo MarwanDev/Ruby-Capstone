@@ -1,7 +1,9 @@
 require './data/preserve_data'
 require './classes/item'
+require './classes/book'
 
 class App
+  include Book
   attr_accessor :books, :labels, :items, :music_albums, :genres, :games, :authors
 
   # importing a class ==>      require './classes/book'   beware of ./
@@ -25,15 +27,20 @@ class App
   end
 
   def list_all_books
-    puts 'books'
+    @books.each { |book| puts "Title: \"#{book.to_hash.label['title']}\", Author: #{book.to_hash['author']}" }
   end
 
   def list_all_labels
-    puts 'labels'
+    @labels.each { |label| puts "Title: \"#{label.to_hash.label['title']}\", Author: #{label.to_hash['author']}" }
   end
 
   def add_a_book
-    puts 'add a book'
+    print 'Enter publisher : '
+    publisher = gets.chomp
+    print 'Enter publish date : '
+    publish_date = gets.chomp
+    book = Book.new(publisher, publish_date)
+    @books << book
   end
 
   def list_all_music_albums
