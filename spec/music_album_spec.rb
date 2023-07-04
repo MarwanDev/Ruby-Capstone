@@ -11,7 +11,7 @@ describe MusicAlbum do
     end
 
     it 'should have attributes of publish_date and on_spotify' do
-      expect(@music_album).to have_attributes(:on_spotify => {:on_spotify => true}, :publish_date => "2020-01-01")
+      expect(@music_album).to have_attributes(on_spotify: { on_spotify: true }, publish_date: '2020-01-01')
     end
 
     it 'can_be_archived should return false when both publish_date AND on_spotify are not true' do
