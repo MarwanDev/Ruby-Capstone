@@ -18,13 +18,13 @@ describe Game do
     end
   end
   describe '#multiplayer' do
-  it 'returns the correct publish_date' do
-    @game.last_played_at.should eql "2023/07/04"
+    it 'returns the correct publish_date' do
+      @game.last_played_at.should eql '2023/07/04'
     end
   end
   describe '#publish_date' do
-  it 'returns the correct publish_date' do
-    @game.publish_date.should eql '2018/06/15'
+    it 'returns the correct publish_date' do
+      @game.publish_date.should eql '2018/06/15'
     end
   end
   describe '#can_be_archived?' do
