@@ -12,7 +12,7 @@ class Label
 
   def add_item(publish_date)
     item = Item.new(publish_date)
-    item.label = self
     @items << item
+    item.label = self
   end
 end
