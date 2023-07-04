@@ -13,12 +13,11 @@ class Genre
     item.genre = self
   end
 
-   def to_hash
+  def to_hash
     {
       id: @id,
       name: @name,
       items: @items.map(&:to_hash)
     }
   end
-  
 end
