@@ -2,6 +2,7 @@ require './data/preserve_data'
 require './classes/item'
 require './classes/genre'
 require './classes/music_album'
+require './classes/game'
 
 class App
   attr_accessor :books, :labels, :items, :music_albums, :genres, :games, :authors
@@ -52,6 +53,15 @@ class App
 
   def list_of_games
     puts 'games'
+    @games = file_read('data/games.json')
+    puts 'No games found' if @games.empty?
+
+    @games.each do |game|
+      puts "ID: #{game['id']}",
+           "Publish Date: #{game['publish_date']}, Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}"
+    end
+
+    puts '=========================='
   end
 
   def list_all_genres
@@ -81,9 +91,30 @@ class App
 
   def list_all_authors
     puts 'authors'
+    @authors = file_read('data/authors.json')
+    puts 'No Authors found' if @authors.empty?
+
+    @authors.each do |author|
+      puts "ID: #{author['id']}, Name: #{author['name']}"
+    end
+
+    puts '=========================='
   end
 
   def add_a_game
-    puts 'add a games'
+    puts 'add a game'
+    puts 'Enter the game publish date:'
+    publish_date = gets.chomp
+    puts 'Is the game multiplayer? (Y/N)'
+    multiplayer = gets.chomp
+    multiplayer = true if %w[Y y].include?(multiplayer)
+    multiplayer = false if %w[N n].include?(multiplayer)
+    puts 'Last time the game was played'
+    last_played_at = gets.chomp
+    @games << Game.new(publish_date, multiplayer, last_played_at)
+    puts 'Game added!'
+    file_write('./data/games.json', @games)
+
+    puts '=========================='
   end
 end
