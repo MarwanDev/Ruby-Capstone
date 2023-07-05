@@ -7,25 +7,25 @@ describe Author do
 
   describe '#new' do
     it 'takes two parameters and returns a Author object' do
-      @author.should be_an_instance_of Author
+      expect(@author).to be_an_instance_of Author
     end
   end
 
   describe '#first_name' do
     it 'returns the correct first_name' do
-      @author.first_name.should eql 'Ezz-Eldin'
+      expect(@author.first_name).to eql 'Ezz-Eldin'
     end
   end
 
   describe '#last_name' do
     it 'returns the correct first_name' do
-      @author.last_name.should eql 'Shokry'
+      expect(@author.last_name).to eql 'Shokry'
     end
   end
 
   describe '#items' do
     it 'returns the correct first_name' do
-      @author.items.should eql []
+      expect(@author.items).to eql []
     end
   end
 

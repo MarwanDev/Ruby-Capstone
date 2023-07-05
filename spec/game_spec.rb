@@ -8,31 +8,31 @@ describe Game do
 
   describe '#new' do
     it 'takes three parameters and returns a Game object' do
-      @game.should be_an_instance_of Game
+      expect(@game).to be_an_instance_of Game
     end
   end
 
   describe '#multiplayer' do
     it 'returns the correct publish_date' do
-      @game.multiplayer.should be_truthy
+      expect(@game.multiplayer).to be_truthy
     end
   end
   describe '#multiplayer' do
     it 'returns the correct publish_date' do
-      @game.last_played_at.should eql '2023/07/04'
+      expect(@game.last_played_at).to eql '2023/07/04'
     end
   end
   describe '#publish_date' do
     it 'returns the correct publish_date' do
-      @game.publish_date.should eql '2018/06/15'
+      expect(@game.publish_date).to eql '2018/06/15'
     end
   end
   describe '#can_be_archived?' do
-    it 'returns the whther it can be archived' do
+    it 'returns the whether it can be archived (true)' do
       game = Game.new '2018-06-15', true, '2010-02-03'
       expect(game.can_be_archived?).to eql true
     end
-    it 'returns the whther it can be archived' do
+    it 'returns the whether it can be archived (false)' do
       game = Game.new '2018-06-15', true, '2022-02-03'
       expect(game.can_be_archived?).to eql false
     end
