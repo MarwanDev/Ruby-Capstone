@@ -79,7 +79,7 @@ class App
     puts 'No Authors found' if @authors.empty?
 
     @authors.each_with_index do |author, index|
-      puts "#{index} - #{author['id']}, Name: #{author['name']}"
+      puts "#{index} - Name: #{author['first_name']} #{author['last_name']}"
     end
 
     puts '=========================='
