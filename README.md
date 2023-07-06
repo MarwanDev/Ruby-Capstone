@@ -22,9 +22,9 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 TDD Project <a name="tdd"></a>
+# 📖 Ruby Capstons Project <a name="tdd"></a>
 
-Ruby Capstons Project
+Ruby Capstons Project <a href="https://drive.google.com/file/d/1_87MwuFn6YElDYkkMV3d05sL5O4g-1fp/view?usp=sharing">video presentation</a>
 
 ## 🛠 Built With <a name="built-with"></a>
 

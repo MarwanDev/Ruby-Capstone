@@ -45,6 +45,7 @@ class App
     book = Book.new(publisher, publish_date)
     @books << book
     file_write('./data/books.json', @books)
+    puts '=========================='
   end
 
   def list_all_music_albums
