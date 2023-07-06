@@ -1,6 +1,6 @@
 require 'date'
 class Item
-  attr_accessor :genres, :authors, :sources, :labels, :publish_date, :archived
+  attr_accessor :genres, :authors, :labels, :publish_date, :archived
   attr_reader :id
 
   def initialize(publish_date, archived: false)
@@ -9,7 +9,6 @@ class Item
     @archived = archived
     @genres = []
     @authors = []
-    @sources = []
     @labels = []
   end
 
@@ -30,7 +29,6 @@ class Item
       archived: @archived,
       genres: @genres,
       authors: @authors,
-      sources: @sources,
       labels: @labels
     }
   end

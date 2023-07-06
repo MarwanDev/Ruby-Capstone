@@ -14,7 +14,9 @@ def display_prompts
   puts '7 - Add a book'
   puts '8 - Add a music album'
   puts '9 - Add a game'
-  puts '10 - Exit'
+  puts '10 - Add_an_author'
+  puts '11 - Add a genre'
+  puts '12 - Exit'
   puts ' '
 end
 
@@ -42,6 +44,10 @@ loop do
   when 9
     app.add_a_game
   when 10
+    app.add_an_author
+  when 11
+    app.add_a_genre
+  when 12
     puts 'Thanks for using our catalog, see you soon.'
     break
   else

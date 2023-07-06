@@ -11,6 +11,7 @@ def file_read(file)
     []
   end
 end
+
 def file_write(file, content)
   existing_data = file_read(file)
   all_data = existing_data + content.map(&:to_hash)

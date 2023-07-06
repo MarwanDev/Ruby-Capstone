@@ -4,6 +4,7 @@ require './classes/book'
 require './classes/genre'
 require './classes/music_album'
 require './classes/game'
+require './classes/author'
 
 class App
   attr_accessor :books, :labels, :items, :music_albums, :genres, :games, :authors
@@ -37,23 +38,12 @@ class App
     puts '=========================='
   end
 
-  def add_a_book
-    print 'Enter publisher : '
-    publisher = gets.chomp
-    print 'Enter publish date : '
-    publish_date = gets.chomp
-    book = Book.new(publisher, publish_date)
-    @books << book
-    file_write('./data/books.json', @books)
-    puts '=========================='
-  end
-
   def list_all_music_albums
     @music_albums = file_read('data/music_albums.json')
     puts 'No music albums found' if @music_albums.empty?
 
     @music_albums.each do |album|
-      puts "ID: #{album['id']}",
+      puts "#{index} - #{album['id']}",
            "Publish Date: #{album['publish_date']}, On Spotify: #{album['on_spotify']}"
     end
 
@@ -65,8 +55,8 @@ class App
     @games = file_read('data/games.json')
     puts 'No games found' if @games.empty?
 
-    @games.each do |game|
-      puts "ID: #{game['id']}",
+    @games.each_with_index do |game, index|
+      puts "#{index} - #{game['id']}",
            "Publish Date: #{game['publish_date']}, Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}"
     end
 
@@ -77,8 +67,19 @@ class App
     @genres = file_read('data/genres.json')
     puts 'No Genres found' if @genres.empty?
 
-    @genres.each do |genre|
-      puts "ID: #{genre['id']}, Name: #{genre['name']}"
+    @genres.each_with_index do |genre, index|
+      puts "#{index} - Name: #{genre['name']}"
+    end
+
+    puts '=========================='
+  end
+
+  def list_all_authors
+    @authors = file_read('data/authors.json')
+    puts 'No Authors found' if @authors.empty?
+
+    @authors.each_with_index do |author, index|
+      puts "#{index} - #{author['id']}, Name: #{author['name']}"
     end
 
     puts '=========================='
@@ -91,21 +92,49 @@ class App
     on_spotify = gets.chomp
     on_spotify = true if %w[Y y].include?(on_spotify)
     on_spotify = false if %w[N n].include?(on_spotify)
-    @music_albums << MusicAlbum.new(publish_date, on_spotify).to_hash
+
+    genres = file_read('data/genres.json')
+    authors = file_read('data/authors.json')
+
+    puts 'Choose a genre by index:'
+    list_all_genres
+    genre_index = gets.chomp.to_i
+
+    puts 'Choose an author by index:'
+    list_all_authors
+    author_index = gets.chomp.to_i
+
+    genre = genres[genre_index]['name']
+    author = "#{authors[author_index]['first_name']} #{authors[author_index]['last_name']}"
+
+    @music_albums << MusicAlbum.new(publish_date, on_spotify, genre, author).to_hash
     puts 'Music album added!'
     file_write('./data/music_albums.json', @music_albums)
 
     puts '=========================='
   end
 
-  def list_all_authors
-    puts 'authors'
-    @authors = file_read('data/authors.json')
-    puts 'No Authors found' if @authors.empty?
+  def add_a_book
+    puts 'Enter publisher : '
+    publisher = gets.chomp
+    puts 'Enter publish date : '
+    publish_date = gets.chomp
+    puts 'Enter a genre'
 
-    @authors.each do |author|
-      puts "ID: #{author['id']}, Name: #{author['name']}"
-    end
+    puts 'Choose a genre by index:'
+    list_all_genres
+    genre_index = gets.chomp.to_i
+
+    puts 'Choose an author by index:'
+    list_all_authors
+    author_index = gets.chomp.to_i
+
+    genre = genres[genre_index]['name']
+    author = "#{authors[author_index]['first_name']} #{authors[author_index]['last_name']}"
+
+    book = Book.new(publisher, publish_date, genre, author)
+    @books << book
+    file_write('./data/books.json', @books)
 
     puts '=========================='
   end
@@ -123,6 +152,32 @@ class App
     @games << Game.new(publish_date, multiplayer, last_played_at)
     puts 'Game added!'
     file_write('./data/games.json', @games)
+
+    puts '=========================='
+  end
+
+  def add_a_genre
+    puts 'Enter genre name : '
+    name = gets.chomp
+
+    genre = Genre.new(name)
+    @genres << genre
+    file_write('./data/genres.json', @genres)
+    puts 'Genre added!'
+
+    puts '=========================='
+  end
+
+  def add_an_author
+    puts 'Enter first name : '
+    first_name = gets.chomp
+    puts 'Enter last name : '
+    last_name = gets.chomp
+
+    author = Author.new(first_name, last_name)
+    @authors << author
+    file_write('./data/authors.json', @authors)
+    puts 'Author added!'
 
     puts '=========================='
   end
