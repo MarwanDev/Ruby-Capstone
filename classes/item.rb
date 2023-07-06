@@ -27,7 +27,7 @@ class Item
   def to_hash
     {
       id: @id,
-      publish_date: @publish_date,
+      publish_date: @publish_date,z
       archived: @archived,
       genres: @genres,
       authors: @authors,
