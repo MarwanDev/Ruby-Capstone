@@ -1,5 +1,4 @@
 require 'date'
-
 class Item
   attr_accessor :genres, :authors, :sources, :labels, :publish_date, :archived
   attr_reader :id
@@ -27,7 +26,7 @@ class Item
   def to_hash
     {
       id: @id,
-      publish_date: @publish_date,z
+      publish_date: @publish_date,
       archived: @archived,
       genres: @genres,
       authors: @authors,
