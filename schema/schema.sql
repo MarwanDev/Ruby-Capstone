@@ -2,8 +2,7 @@ CREATE TABLE music_album(
   id INT SERIAL PRIMARY KEY,
   on_spotify BOOLEAN,
   publish_date DATE,
-  archive BOOLEAN,
-  genre_id INT REFERENCES genre(id)
+  archive BOOLEAN
 );
 
 CREATE TABLE genre(
@@ -16,12 +15,65 @@ CREATE TABLE games(
   multiplayer BOOLEAN,
   publish_date DATE,
   archive BOOLEAN,
-  last_time_played DATE,
-  genre_id INT REFERENCES genre(id)
-  author_id INT REFERENCES authors(id)
+  last_time_played DATE
 );
 
 CREATE TABLE authors(
   id int primary key GENERATED ALWAYS AS IDENTITY,
   name VARCHAR(100)
 );
+
+CREATE TABLE books(
+  id int primary key GENERATED ALWAYS AS IDENTITY,
+  publisher VARCHAR(100),
+  publish_date DATE,
+  archive BOOLEAN,
+  cover_state VARCHAR(100)
+);
+
+CREATE TABLE labels(
+  id int primary key GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR(100)
+);
+
+alter table books
+add foreign key(label_id)
+REFERENCES labels(id),
+
+add foreign key(genre_id)
+REFERENCES genre(id);
+
+add foreign key(author_id)
+REFERENCES author(id);
+
+alter table games
+add foreign key(label_id)
+REFERENCES labels(id),
+
+add foreign key(genre_id)
+REFERENCES genre(id);
+
+add foreign key(author_id)
+REFERENCES author(id);
+
+alter table music_album
+add foreign key(label_id)
+REFERENCES labels(id),
+
+add foreign key(genre_id)
+REFERENCES genre(id);
+
+add foreign key(author_id)
+REFERENCES author(id);
+
+create index on music_album (label_id)
+create index on music_album (genre_id)
+create index on music_album (author_id)
+
+create index on books (label_id)
+create index on books (genre_id)
+create index on books (author_id)
+
+create index on games (label_id)
+create index on games (genre_id)
+create index on games (author_id)

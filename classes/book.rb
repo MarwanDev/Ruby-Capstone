@@ -1,9 +1,8 @@
 require './classes/item'
-
 class Book < Item
   attr_accessor :publisher, :cover_state
 
-  def initialize(publisher, publish_date, cover_state: "good")
+  def initialize(publisher, publish_date, cover_state: 'good')
     super(publish_date)
     @publisher = publisher
     @cover_state = cover_state
@@ -15,10 +14,10 @@ class Book < Item
 
   def to_hash
     {
-      publish_date: @publish_date
-      author: @author
-      label: @label
-      publisher: @publisher
+      id: @id,
+      publish_date: @publish_date,
+      publisher: @publisher,
+      cover_state: @cover_state
     }
   end
 end
